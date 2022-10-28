@@ -1,10 +1,11 @@
 import { Octokit } from "octokit";
 
 const argv = process.argv;
-const owner = argv[2];
+const exportOwner = argv[2];
 const exportRepo = argv[3];
-const importRepo = argv[4];
-const token = argv[5];
+const importOwner = argv[4];
+const importRepo = argv[5];
+const token = argv[6];
 
 const octokit = new Octokit({
   auth: token,
@@ -12,6 +13,7 @@ const octokit = new Octokit({
 
 const getLabels = async (isExport = true) => {
   const repo = isExport ? exportRepo : importRepo;
+  const owner = isExport ? exportOwner : importOwner;
   const res = await octokit
     .request("GET /repos/{owner}/{repo}/labels", {
       owner,
@@ -25,7 +27,7 @@ const deleteLabel = async (delLabels = []) => {
   delLabels.forEach(async (dl) => {
     const name = dl.name;
     await octokit.request("DELETE /repos/{owner}/{repo}/labels/{name}", {
-      owner,
+      owner: importOwner,
       repo: importRepo,
       name,
     });
@@ -36,7 +38,7 @@ const postLabel = async (registerLabels = []) => {
   registerLabels.forEach(async (rl) => {
     const { name, description, color } = rl;
     await octokit.request("POST /repos/{owner}/{repo}/labels", {
-      owner,
+      owner: importOwner,
       repo: importRepo,
       name,
       description,
