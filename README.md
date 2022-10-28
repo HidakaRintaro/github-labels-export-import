@@ -1,6 +1,10 @@
 # GitHub Labels export import
 Export the Labels of a repository on GitHub and import them into another repository.
 
+## Languages
+- [English](README.md)
+- [Japanese / 日本語](README-ja.md)
+
 ## Description
 1. Remove all labels from the import repository
 2. Get all labels from the export repository
