@@ -22,7 +22,7 @@ npm install
 
 ## Usage
 ```bash
-node index.js <owner> <exportRepo> <importRepo> <token>
+node index.js <exportOwner> <exportRepo> <importOwner> <importRepo> <token>
 ```
 
 ## LICENSE
